@@ -1,9 +1,11 @@
 @startuml REQ-0020
 autonumber
 
+participant "Analytics" as analytics
 participant "Comm Manager" as comm
 participant "Controller" as ctrl
 
+analytics --> unknown: EVENT:TELEMETRY_READY
 comm --> unknown: EVENT:COMM_TX_COMPLETE
 ctrl -> comm: Comm_SendStatus()
 
