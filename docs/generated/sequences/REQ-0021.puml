@@ -1,0 +1,9 @@
+@startuml REQ-0021
+autonumber
+
+participant "Comm Manager" as Comm_Manager
+
+
+Comm_Manager --> Comm_Manager: EVENT:CONTROL_ACTION\nComm_OnRemoteCommand() → Controller_ReportStatus()
+
+@enduml

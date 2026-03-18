@@ -1,8 +1,0 @@
-@startuml REQ-0021
-autonumber
-
-participant "Comm Manager" as comm
-
-comm --> unknown: EVENT:CONTROL_ACTION
-
-@enduml

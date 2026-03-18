@@ -1,3 +1,5 @@
+output_dir: docs/generated/
+
 validate:
   tags:
     req:
@@ -11,7 +13,6 @@ validate:
 
 trace:
   format: plantuml
-  output_dir: docs/sequences/
   participant_field: "Subsystem"
   options:
     autonumber: true
@@ -22,5 +23,3 @@ impact:
     id_column: "Req ID"
     name_column: "Name"
     format: csv
-  output:
-    format: markdown

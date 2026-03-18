@@ -1,0 +1,12 @@
+@startuml REQ-0020
+autonumber
+
+participant "Comm Manager" as Comm_Manager
+
+note over Comm_Manager: build_telemetry_payload()
+note over Comm_Manager: Controller_ReportStatus()
+
+Comm_Manager -> Comm_Manager: Comm_SendStatus()
+Comm_Manager -> Comm_Manager: Comm_SendStatus()
+
+@enduml

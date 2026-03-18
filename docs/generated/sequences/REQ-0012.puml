@@ -1,0 +1,11 @@
+@startuml REQ-0012
+autonumber
+
+participant "Sensor Driver" as Sensor_Driver
+
+note over Sensor_Driver: Sensor_Calibrate()
+
+Sensor_Driver -> Sensor_Driver: Controller_GetCalibration()
+Sensor_Driver -> Sensor_Driver: Controller_GetCalibration()
+
+@enduml

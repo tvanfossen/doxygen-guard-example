@@ -1,0 +1,13 @@
+@startuml REQ-0011
+autonumber
+
+participant "Sensor Driver" as Sensor_Driver
+participant "Comm Manager" as Comm_Manager
+
+note over Sensor_Driver: aggregate_readings()
+
+Sensor_Driver --> Comm_Manager: EVENT:CONTROL_ACTION\nController_OnSensorData() → Controller_ReportStatus()
+note right of Sensor_Driver: THRESHOLD_CHECK
+Sensor_Driver --> Sensor_Driver: EVENT:SENSOR_DATA_READY\nSensor_ReadHumidity() → Controller_OnSensorData()
+
+@enduml
