@@ -12,19 +12,7 @@ validate:
 trace:
   format: plantuml
   output_dir: docs/sequences/
-  participants:
-    - id: sensor
-      label: "Sensor Driver"
-      match: "sensor/"
-    - id: ctrl
-      label: "Controller"
-      match: "controller/"
-    - id: comm
-      label: "Comm Manager"
-      match: "comm/"
-    - id: analytics
-      label: "Analytics"
-      match: "analytics/"
+  participant_field: "Subsystem"
   options:
     autonumber: true
 
