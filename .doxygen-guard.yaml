@@ -1,0 +1,46 @@
+validate:
+  tags:
+    req:
+      pattern: "^REQ-\\w+$"
+    emits:
+      require_prefix: ["EVENT:"]
+    handles:
+      require_prefix: ["EVENT:"]
+    ext:
+      require_contains: "::"
+
+trace:
+  format: plantuml
+  output_dir: docs/sequences/
+  participants:
+    - id: sensor
+      label: "Sensor Driver"
+      match: "sensor/"
+    - id: ctrl
+      label: "Controller"
+      match: "controller/"
+    - id: comm
+      label: "Comm Manager"
+      match: "comm/"
+  options:
+    autonumber: true
+    show_notes: true
+
+impact:
+  requirements:
+    file: requirements.csv
+    id_column: "Req ID"
+    name_column: "Name"
+    format: csv
+  test_mapping:
+    - match: "REQ-001[0-9]"
+      suite: "Sensor Suite"
+      command: "pytest tests/sensor/"
+    - match: "REQ-002[0-9]"
+      suite: "Comm Suite"
+      command: "pytest tests/comm/"
+    - match: ".*"
+      suite: "Full Regression"
+      command: "pytest"
+  output:
+    format: markdown

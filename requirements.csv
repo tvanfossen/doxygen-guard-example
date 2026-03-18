@@ -1,0 +1,6 @@
+Req ID,Name
+REQ-0010,Temperature Sensing
+REQ-0011,Humidity Sensing
+REQ-0012,Sensor Calibration
+REQ-0020,Remote Status Reporting
+REQ-0021,Remote Command Handling
