@@ -1,11 +1,18 @@
-@startuml REQ-0012
+@startuml REQ-0012 Sensor Calibration
 autonumber
 
-participant "Sensor Driver" as Sensor_Driver
+box "System" #LightBlue
+  participant "Sensor Driver" as Sensor_Driver
+end box
+
+header
+  **REQ-0012: Sensor Calibration**
+  //Description:// Apply factory calibration offsets using controller data
+  //Acceptance Criteria:// Sensor_Calibrate retrieves and applies offsets from Controller_GetCalibration
+end header
 
 note over Sensor_Driver: Sensor_Calibrate()
 
-Sensor_Driver -> Sensor_Driver: Controller_GetCalibration()
 Sensor_Driver -> Sensor_Driver: Controller_GetCalibration()
 
 @enduml

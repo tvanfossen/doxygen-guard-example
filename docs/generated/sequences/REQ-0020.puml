@@ -1,12 +1,32 @@
-@startuml REQ-0020
+@startuml REQ-0020 Remote Status Reporting
 autonumber
 
-participant "Comm Manager" as Comm_Manager
+entity "Cloud" as Cloud
+
+box "System" #LightBlue
+  participant "Comm Manager" as Comm_Manager
+  participant "Event Bus" as Event_Bus
+  participant "Controller" as Controller
+  participant "OTA Manager" as OTA_Manager
+end box
+
+header
+  **REQ-0020: Remote Status Reporting**
+  //Description:// Publish device status to cloud via MQTT and handle shadow sync
+  //Acceptance Criteria:// Comm_SendStatus publishes to MQTT; shadow events update connectivity state
+end header
 
 note over Comm_Manager: build_telemetry_payload()
-note over Comm_Manager: Controller_ReportStatus()
+note over Comm_Manager: Shadow_OnConnectivityEvent()
+note over Comm_Manager: Shadow_Initialize()
 
-Comm_Manager -> Comm_Manager: Comm_SendStatus()
-Comm_Manager -> Comm_Manager: Comm_SendStatus()
+Comm_Manager -> Event_Bus: Event_register()
+Comm_Manager --> Cloud: EVENT:CLOUD_CONFIG_UPDATE\nShadow_ScheduleConfigPublish()
+Controller -> Comm_Manager: Comm_SendStatus()
+Controller -> Comm_Manager: Comm_SendStatus()
+note right of Controller: MSG_DISPATCH_CYCLE
+OTA_Manager --> Cloud: EVENT:CLOUD_OTA_RESULT\nOTA_OnDownloadComplete()
+OTA_Manager -> Comm_Manager: Comm_SendStatus()
+note right of OTA_Manager: OTA_VERIFY_CRC
 
 @enduml

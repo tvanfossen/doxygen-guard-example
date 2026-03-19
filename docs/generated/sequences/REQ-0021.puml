@@ -1,9 +1,18 @@
-@startuml REQ-0021
+@startuml REQ-0021 Remote Command Handling
 autonumber
 
-participant "Comm Manager" as Comm_Manager
+box "System" #LightBlue
+  participant "Comm Manager" as Comm_Manager
+  participant "Controller" as Controller
+end box
+
+header
+  **REQ-0021: Remote Command Handling**
+  //Description:// Receive remote commands and dispatch control actions
+  //Acceptance Criteria:// Comm_OnRemoteCommand parses command and posts EVENT:CONTROL_ACTION
+end header
 
 
-Comm_Manager --> Comm_Manager: EVENT:CONTROL_ACTION\nComm_OnRemoteCommand() → Controller_ReportStatus()
+Comm_Manager --> Controller: EVENT:CONTROL_ACTION\nComm_OnRemoteCommand() → Controller_ReportStatus()
 
 @enduml

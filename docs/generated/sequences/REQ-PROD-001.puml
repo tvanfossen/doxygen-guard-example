@@ -1,0 +1,20 @@
+@startuml REQ-PROD-001 Device Environmental Monitoring
+autonumber
+
+box "System" #LightBlue
+  participant "Sensor Driver" as Sensor_Driver
+  participant "Controller" as Controller
+end box
+
+header
+  **REQ-PROD-001: Device Environmental Monitoring**
+  //Description:// The system shall continuously monitor temperature and humidity and report to cloud
+  //Acceptance Criteria:// Sensor readings aggregated and transmitted; cloud receives telemetry within reporting interval
+end header
+
+note over Sensor_Driver: aggregate_readings()
+
+Sensor_Driver --> Controller: EVENT:SENSOR_DATA_READY\nSensor_ReadTemperature() → Controller_OnSensorData()
+Sensor_Driver --> Controller: EVENT:SENSOR_DATA_READY\nSensor_ReadHumidity() → Controller_OnSensorData()
+
+@enduml

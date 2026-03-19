@@ -2,6 +2,7 @@
  * @brief Read raw temperature from the sensor hardware.
  * @version 1.0
  * @req REQ-0010
+ * @req REQ-PROD-001
  * @emits EVENT:SENSOR_DATA_READY
  */
 int Sensor_ReadTemperature(void) {
@@ -14,6 +15,7 @@ int Sensor_ReadTemperature(void) {
  * @brief Read raw humidity from the sensor hardware.
  * @version 1.0
  * @req REQ-0011
+ * @req REQ-PROD-001
  * @emits EVENT:SENSOR_DATA_READY
  */
 int Sensor_ReadHumidity(void) {

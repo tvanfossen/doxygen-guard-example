@@ -1,0 +1,104 @@
+# Software Architecture Requirements
+# Fine-grained, module-level requirements for direct code traceability.
+# Each maps tightly to a specific software module or interface.
+#
+# Compare with requirements.csv which contains both software-level
+# and product-level requirements demonstrating the many-to-one mapping.
+
+- id: REQ-0010
+  name: Temperature Sensing
+  module: Sensor Driver
+  description: >
+    Read raw temperature values from the ADC hardware interface
+    and post sensor data events for downstream processing.
+  acceptance_criteria: >
+    Sensor_ReadTemperature returns valid ADC reading.
+    EVENT:SENSOR_DATA_READY posted with raw value.
+  version: v1.0.0
+
+- id: REQ-0011
+  name: Humidity Sensing
+  module: Sensor Driver
+  description: >
+    Read raw humidity values from the ADC hardware interface
+    and post sensor data events for downstream processing.
+  acceptance_criteria: >
+    Sensor_ReadHumidity returns valid ADC reading.
+    EVENT:SENSOR_DATA_READY posted with raw value.
+  version: v1.0.0
+
+- id: REQ-0012
+  name: Sensor Calibration
+  module: Sensor Driver
+  description: >
+    Apply factory calibration offsets to sensor readings
+    using data from the controller's calibration store.
+  acceptance_criteria: >
+    Sensor_Calibrate retrieves offsets via Controller_GetCalibration.
+    Offsets applied to subsequent readings.
+  version: v1.0.0
+
+- id: REQ-0020
+  name: Remote Status Reporting
+  module: Comm Manager
+  description: >
+    Publish device status to cloud via MQTT transport.
+    Handle shadow state synchronization events.
+  acceptance_criteria: >
+    Comm_SendStatus publishes to MQTT topic.
+    Shadow connectivity events update local state.
+  version: v1.0.0
+
+- id: REQ-0021
+  name: Remote Command Handling
+  module: Comm Manager
+  description: >
+    Receive and dispatch remote commands from cloud.
+    Parse command payload and post control action events.
+  acceptance_criteria: >
+    Comm_OnRemoteCommand parses command and posts EVENT:CONTROL_ACTION.
+  version: v1.0.0
+
+- id: REQ-0030
+  name: Control Loop Processing
+  module: Controller
+  description: >
+    Process sensor data against thresholds and dispatch
+    control actions. Report status via comm manager.
+  acceptance_criteria: >
+    Controller_OnSensorData evaluates thresholds.
+    Controller_ReportStatus sends status via Comm_SendStatus.
+  version: v1.0.0
+
+- id: REQ-0040
+  name: OTA Firmware Update
+  module: OTA Manager
+  description: >
+    Orchestrate firmware update lifecycle: receive cloud
+    notification, coordinate download, write to flash,
+    verify integrity, report result.
+  acceptance_criteria: >
+    OTA state machine progresses through download, write, verify.
+    CRC verification passes before reporting success.
+  version: v1.0.0
+
+- id: REQ-0041
+  name: OTA Download Coordination
+  module: Comm Manager
+  description: >
+    Stream firmware chunks from HTTP server and post
+    chunk-received events for OTA manager processing.
+  acceptance_criteria: >
+    Comm_DownloadFirmware streams chunks and posts completion event.
+  version: v1.0.0
+
+- id: REQ-0050
+  name: Event Bus Infrastructure
+  module: Event Bus
+  description: >
+    Provide bitmask-based event registration and dispatch
+    for decoupled inter-module communication.
+  acceptance_criteria: >
+    Event_register accepts bitmask and handler.
+    Event_post dispatches to all matching handlers.
+  version: v1.0.0

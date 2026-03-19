@@ -1,13 +1,19 @@
-@startuml REQ-0011
+@startuml REQ-0011 Humidity Sensing
 autonumber
 
-participant "Sensor Driver" as Sensor_Driver
-participant "Comm Manager" as Comm_Manager
+box "System" #LightBlue
+  participant "Sensor Driver" as Sensor_Driver
+  participant "Controller" as Controller
+end box
+
+header
+  **REQ-0011: Humidity Sensing**
+  //Description:// Read raw humidity from ADC and post sensor data events
+  //Acceptance Criteria:// Sensor_ReadHumidity returns valid ADC reading; EVENT:SENSOR_DATA_READY posted
+end header
 
 note over Sensor_Driver: aggregate_readings()
 
-Sensor_Driver --> Comm_Manager: EVENT:CONTROL_ACTION\nController_OnSensorData() → Controller_ReportStatus()
-note right of Sensor_Driver: THRESHOLD_CHECK
-Sensor_Driver --> Sensor_Driver: EVENT:SENSOR_DATA_READY\nSensor_ReadHumidity() → Controller_OnSensorData()
+Sensor_Driver --> Controller: EVENT:SENSOR_DATA_READY\nSensor_ReadHumidity() → Controller_OnSensorData()
 
 @enduml

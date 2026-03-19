@@ -5,6 +5,7 @@
 #  @version 1.0
 #  @req REQ-0010
 #  @req REQ-0011
+#  @req REQ-PROD-001
 def aggregate_readings(readings, window_seconds):
     cutoff = time.time() - window_seconds
     return [r for r in readings if r.timestamp >= cutoff]

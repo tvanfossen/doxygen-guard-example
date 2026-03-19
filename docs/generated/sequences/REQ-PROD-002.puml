@@ -1,0 +1,19 @@
+@startuml REQ-PROD-002 Remote Device Control
+autonumber
+
+box "System" #LightBlue
+  participant "Comm Manager" as Comm_Manager
+  participant "Controller" as Controller
+end box
+
+header
+  **REQ-PROD-002: Remote Device Control**
+  //Description:// The system shall accept remote commands from cloud and execute control actions
+  //Acceptance Criteria:// Cloud command received within 30s; control action executed and status reported back
+end header
+
+
+Comm_Manager --> Controller: EVENT:CONTROL_ACTION\nComm_OnRemoteCommand() → Controller_ReportStatus()
+Controller -> Comm_Manager: Comm_SendStatus()
+
+@enduml

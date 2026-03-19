@@ -1,0 +1,21 @@
+@startuml REQ-PROD-003 Over-the-Air Firmware Update
+autonumber
+
+box "System" #LightBlue
+  participant "Comm Manager" as Comm_Manager
+  participant "OTA Manager" as OTA_Manager
+end box
+
+header
+  **REQ-PROD-003: Over-the-Air Firmware Update**
+  //Description:// The system shall support remote firmware updates with integrity verification
+  //Acceptance Criteria:// OTA completes download/flash/verify cycle; device reports success or failure to cloud
+end header
+
+
+Comm_Manager --> OTA_Manager: EVENT:COMM_CHUNK_RECEIVED\nComm_DownloadFirmware() → OTA_OnChunkReceived()
+Comm_Manager --> OTA_Manager: EVENT:COMM_DOWNLOAD_COMPLETE\nComm_DownloadFirmware() → OTA_OnDownloadComplete()
+OTA_Manager --> Comm_Manager: EVENT:COMM_DOWNLOAD_START\nOTA_OnUpdateAvailable() → Comm_DownloadFirmware()
+note right of OTA_Manager: OTA_STATE_CHANGE
+
+@enduml

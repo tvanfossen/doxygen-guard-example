@@ -1,13 +1,1 @@
-[
-  {
-    "req_id": "REQ-0011",
-    "req_name": "Humidity Sensing",
-    "functions": [
-      {
-        "name": "Sensor_ReadHumidity",
-        "file": "src/sensor/sensor_driver.c",
-        "version": "1.0"
-      }
-    ]
-  }
-]
+[]

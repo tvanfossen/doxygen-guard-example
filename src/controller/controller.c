@@ -1,8 +1,7 @@
 /**
  * @brief Handle incoming sensor data and decide on control action.
  * @version 1.0
- * @req REQ-0010
- * @req REQ-0011
+ * @req REQ-0030
  * @handles EVENT:SENSOR_DATA_READY
  * @emits EVENT:CONTROL_ACTION
  * @triggers THRESHOLD_CHECK
@@ -25,7 +24,8 @@ calibration_t Controller_GetCalibration(void) {
 /**
  * @brief Send control state to remote via comm manager.
  * @version 1.0
- * @req REQ-0020
+ * @req REQ-0030
+ * @req REQ-PROD-002
  * @handles EVENT:CONTROL_ACTION
  * @ext comm::Comm_SendStatus
  */

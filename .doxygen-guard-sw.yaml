@@ -1,3 +1,7 @@
+# Software-level requirements config (YAML format)
+# Uses module-level requirements with rich metadata.
+# Compare with .doxygen-guard.yaml which uses CSV with product-level requirements.
+
 output_dir: docs/generated/
 
 validate:
@@ -13,7 +17,7 @@ validate:
 
 trace:
   format: plantuml
-  participant_field: "Subsystem"
+  participant_field: "module"
   external:
     - Cloud:
         receives_prefix: ["EVENT:CLOUD_"]
@@ -26,7 +30,7 @@ trace:
 
 impact:
   requirements:
-    file: requirements.csv
-    id_column: "Req ID"
-    name_column: "Name"
-    format: csv
+    file: requirements.yaml
+    id_column: "id"
+    name_column: "name"
+    format: yaml

@@ -1,0 +1,25 @@
+@startuml REQ-0030 Control Loop Processing
+autonumber
+
+box "System" #LightBlue
+  participant "Controller" as Controller
+  participant "Comm Manager" as Comm_Manager
+end box
+
+header
+  **REQ-0030: Control Loop Processing**
+  //Description:// Process sensor data against thresholds and dispatch control actions
+  //Acceptance Criteria:// Controller_OnSensorData evaluates thresholds; Controller_ReportStatus sends status
+end header
+
+note over Controller: MsgBus_RegisterCallback()
+note over Controller: MsgBus_RegisterTransportCbs()
+
+Controller --> Controller: EVENT:CONTROL_ACTION\nController_OnSensorData() → Controller_ReportStatus()
+note right of Controller: THRESHOLD_CHECK
+Controller -> Comm_Manager: Comm_SendStatus()
+Controller --> Controller: EVENT:MSG_QUEUED\nMsgBus_QueueInbound() → MsgBus_ProcessQueue()
+Controller -> Comm_Manager: Comm_SendStatus()
+note right of Controller: MSG_DISPATCH_CYCLE
+
+@enduml

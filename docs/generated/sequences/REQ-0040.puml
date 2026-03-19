@@ -1,0 +1,27 @@
+@startuml REQ-0040 OTA Firmware Update
+autonumber
+
+entity "Hardware" as Hardware
+entity "Cloud" as Cloud
+
+box "System" #LightBlue
+  participant "OTA Manager" as OTA_Manager
+  participant "Comm Manager" as Comm_Manager
+end box
+
+header
+  **REQ-0040: OTA Firmware Update**
+  //Description:// Orchestrate firmware update: download coordination and flash write and verify
+  //Acceptance Criteria:// OTA state machine progresses through download/write/verify; CRC passes before reporting success
+end header
+
+note over OTA_Manager: OTA_GetProgress()
+
+OTA_Manager --> Comm_Manager: EVENT:COMM_DOWNLOAD_START\nOTA_OnUpdateAvailable() → Comm_DownloadFirmware()
+note right of OTA_Manager: OTA_STATE_CHANGE
+OTA_Manager --> Hardware: EVENT:HW_FLASH_WRITE\nOTA_OnChunkReceived()
+OTA_Manager --> Cloud: EVENT:CLOUD_OTA_RESULT\nOTA_OnDownloadComplete()
+OTA_Manager -> Comm_Manager: Comm_SendStatus()
+note right of OTA_Manager: OTA_VERIFY_CRC
+
+@enduml

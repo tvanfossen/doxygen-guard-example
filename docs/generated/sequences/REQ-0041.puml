@@ -1,0 +1,19 @@
+@startuml REQ-0041 OTA Download Coordination
+autonumber
+
+box "System" #LightBlue
+  participant "Comm Manager" as Comm_Manager
+  participant "OTA Manager" as OTA_Manager
+end box
+
+header
+  **REQ-0041: OTA Download Coordination**
+  //Description:// Stream firmware chunks from HTTP server for OTA processing
+  //Acceptance Criteria:// Comm_DownloadFirmware streams chunks and posts completion event
+end header
+
+
+Comm_Manager --> OTA_Manager: EVENT:COMM_CHUNK_RECEIVED\nComm_DownloadFirmware() → OTA_OnChunkReceived()
+Comm_Manager --> OTA_Manager: EVENT:COMM_DOWNLOAD_COMPLETE\nComm_DownloadFirmware() → OTA_OnDownloadComplete()
+
+@enduml
