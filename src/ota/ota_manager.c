@@ -1,8 +1,9 @@
 /**
  * @brief Handle cloud notification of available firmware update.
- * @version 1.0
+ * @version 1.1
  * @req REQ-0040
  * @req REQ-PROD-003
+ * @assumes REQ-0020
  * @handles EVENT:CLOUD_OTA_AVAILABLE
  * @emits EVENT:COMM_DOWNLOAD_START
  * @triggers OTA_STATE_CHANGE
@@ -42,9 +43,9 @@ void OTA_OnDownloadComplete(void) {
 
 /**
  * @brief Query current OTA progress for status reporting.
- * @version 1.0
- * @req REQ-0040
+ * @version 1.1
  * @utility
+ * @supports REQ-0040
  */
 int OTA_GetProgress(void) {
     return (bytes_written * 100) / total_size;

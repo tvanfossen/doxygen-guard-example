@@ -40,8 +40,9 @@ void Shadow_Initialize(void) {
 
 /**
  * @brief Schedule config topic publish to cloud with short delay.
- * @version 1.0
+ * @version 1.1
  * @req REQ-0020
+ * @assumes REQ-0030
  * @emits EVENT:CLOUD_CONFIG_UPDATE
  */
 void Shadow_ScheduleConfigPublish(void) {

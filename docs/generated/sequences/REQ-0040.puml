@@ -13,9 +13,9 @@ header
   **REQ-0040: OTA Firmware Update**
   //Description:// Orchestrate firmware update: download coordination and flash write and verify
   //Acceptance Criteria:// OTA state machine progresses through download/write/verify; CRC passes before reporting success
+  //Preconditions:// REQ-0020 (Remote Status Reporting)
 end header
 
-note over OTA_Manager: OTA_GetProgress()
 
 OTA_Manager --> Comm_Manager: EVENT:COMM_DOWNLOAD_START\nOTA_OnUpdateAvailable() → Comm_DownloadFirmware()
 note right of OTA_Manager: OTA_STATE_CHANGE

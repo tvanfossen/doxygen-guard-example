@@ -12,8 +12,6 @@ header
   //Acceptance Criteria:// Controller_OnSensorData evaluates thresholds; Controller_ReportStatus sends status
 end header
 
-note over Controller: MsgBus_RegisterCallback()
-note over Controller: MsgBus_RegisterTransportCbs()
 
 Controller --> Controller: EVENT:CONTROL_ACTION\nController_OnSensorData() → Controller_ReportStatus()
 note right of Controller: THRESHOLD_CHECK

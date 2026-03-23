@@ -32,9 +32,11 @@ void MsgBus_ProcessQueue(void) {
 
 /**
  * @brief Register the MCU event callback for message dispatch.
- * @version 1.0
- * @req REQ-0030
+ * @version 1.1
  * @utility
+ * @supports REQ-0030
+ * @supports REQ-0020
+ * @supports REQ-0040
  */
 void MsgBus_RegisterCallback(msg_event_cb callback) {
     my_eventCb = callback;
@@ -42,9 +44,10 @@ void MsgBus_RegisterCallback(msg_event_cb callback) {
 
 /**
  * @brief Register transport-layer callbacks for outbound data.
- * @version 1.0
- * @req REQ-0030
+ * @version 1.1
  * @utility
+ * @supports REQ-0030
+ * @supports REQ-0020
  */
 void MsgBus_RegisterTransportCbs(transport_data_cb data_cb, transport_state_cb state_cb) {
     s_transport_data_cb = data_cb;

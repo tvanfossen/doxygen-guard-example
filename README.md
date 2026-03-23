@@ -36,6 +36,41 @@ Source functions carry both levels simultaneously:
 
 The `participant_field` config key determines which column/field resolves the diagram participant names. Switch configs to see different diagram perspectives of the same codebase.
 
+## Tag Taxonomy
+
+Functions relate to requirements in three ways:
+
+| Tag | Meaning | Diagram behavior |
+|-----|---------|-----------------|
+| `@req REQ-XXX` | Function fulfills the requirement | Appears as participant/edge in REQ-XXX's sequence diagram |
+| `@supports REQ-XXX` | Function is shared infrastructure backing the requirement | Excluded from REQ-XXX's feature diagram; listed in infrastructure table |
+| `@assumes REQ-XXX` | Function's sequence starts after REQ-XXX is satisfied | Rendered as "Preconditions: REQ-XXX" in diagram header |
+
+### Examples in this codebase
+
+**@supports** — `MsgBus_RegisterCallback()` is infrastructure that multiple features depend on:
+```c
+/**
+ * @brief Register the MCU event callback for message dispatch.
+ * @utility
+ * @supports REQ-0030
+ * @supports REQ-0020
+ * @supports REQ-0040
+ */
+```
+
+**@assumes** — OTA requires comm to be initialized:
+```c
+/**
+ * @brief Handle cloud notification of available firmware update.
+ * @req REQ-0040
+ * @assumes REQ-0020
+ * @handles EVENT:CLOUD_OTA_AVAILABLE
+ */
+```
+
+The `trace --all` command also generates `docs/generated/infrastructure.md` showing which utility functions back which requirements.
+
 ## Project Structure
 
 ```
