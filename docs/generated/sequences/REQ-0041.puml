@@ -1,6 +1,9 @@
 @startuml REQ-0041 OTA Download Coordination
 autonumber
 
+entity "Hardware" as Hardware
+entity "Cloud" as Cloud
+
 box "System" #LightBlue
   participant "Comm Manager" as Comm_Manager
   participant "OTA Manager" as OTA_Manager
@@ -13,7 +16,13 @@ header
 end header
 
 
+loop (http_has_data(&stream))
 Comm_Manager --> OTA_Manager: EVENT:COMM_CHUNK_RECEIVED\nComm_DownloadFirmware() → OTA_OnChunkReceived()
+OTA_Manager --> Hardware: EVENT:HW_FLASH_WRITE\nOTA_OnChunkReceived()
+end loop
 Comm_Manager --> OTA_Manager: EVENT:COMM_DOWNLOAD_COMPLETE\nComm_DownloadFirmware() → OTA_OnDownloadComplete()
+note right of OTA_Manager: OTA_VERIFY_CRC
+OTA_Manager -> Comm_Manager: Comm_SendStatus()
+OTA_Manager --> Cloud: EVENT:CLOUD_OTA_RESULT\nOTA_OnDownloadComplete()
 
 @enduml

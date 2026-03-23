@@ -2,7 +2,6 @@
 autonumber
 
 box "System" #LightBlue
-  participant "Comm Manager" as Comm_Manager
   participant "Event Bus" as Event_Bus
 end box
 
@@ -12,8 +11,5 @@ header
   //Acceptance Criteria:// Event_register accepts bitmask+handler; Event_post dispatches to matching handlers
 end header
 
-note over Event_Bus: Event_post()
-
-Comm_Manager -> Event_Bus: Event_register()
 
 @enduml

@@ -13,11 +13,17 @@ header
 end header
 
 
-Controller --> Controller: EVENT:CONTROL_ACTION\nController_OnSensorData() → Controller_ReportStatus()
 note right of Controller: THRESHOLD_CHECK
+alt (sensor_value > threshold)
+Controller --> Controller: EVENT:CONTROL_ACTION\nController_OnSensorData() → Controller_ReportStatus()
 Controller -> Comm_Manager: Comm_SendStatus()
+end alt
 Controller --> Controller: EVENT:MSG_QUEUED\nMsgBus_QueueInbound() → MsgBus_ProcessQueue()
-Controller -> Comm_Manager: Comm_SendStatus()
 note right of Controller: MSG_DISPATCH_CYCLE
+loop (queue_receive(&inbound_queue, &msg))
+alt (msg.event_id == MSG_EVENT_STATUS_REQUEST)
+Controller -> Comm_Manager: Comm_SendStatus()
+end alt
+end loop
 
 @enduml

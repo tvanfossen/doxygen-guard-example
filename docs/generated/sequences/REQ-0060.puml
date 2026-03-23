@@ -1,0 +1,39 @@
+@startuml REQ-0060 Device Provisioning
+autonumber
+
+box "System" #LightBlue
+  participant "Provisioning Manager" as Provisioning_Manager
+  participant "WiFi Scanner" as WiFi_Scanner
+  participant "Cert Manager" as Cert_Manager
+  participant "Comm Manager" as Comm_Manager
+end box
+
+header
+  **REQ-0060: Device Provisioning**
+  //Description:// Orchestrate device provisioning: scan networks and join and install certificates
+  //Acceptance Criteria:// Device progresses through scan/join/cert states; provisioning completes or retries on failure
+end header
+
+
+External -> Provisioning_Manager: EVENT:FACTORY_RESET_COMPLETE
+note right of Provisioning_Manager: PROV_STATE_INIT
+Provisioning_Manager --> WiFi_Scanner: EVENT:PROV_SCAN_START\nProvision_Start() → WiFiScan_Start()
+WiFi_Scanner --> Provisioning_Manager: EVENT:PROV_SCAN_COMPLETE\nWiFiScan_Start() → Provision_OnScanComplete()
+alt (count > 0)
+Provisioning_Manager --> WiFi_Scanner: EVENT:PROV_JOIN_REQUEST\nProvision_OnScanComplete() → WiFiScan_Join()
+WiFi_Scanner --> Provisioning_Manager: EVENT:PROV_JOIN_RESULT\nWiFiScan_Join() → Provision_OnJoinResult()
+else
+end alt
+note right of Provisioning_Manager: PROV_RETRY_CHECK
+alt (result->success)
+Provisioning_Manager --> Cert_Manager: EVENT:PROV_CERT_REQUEST\nProvision_OnJoinResult() → Cert_Provision()
+Cert_Manager --> Provisioning_Manager: EVENT:PROV_CERT_INSTALLED\nCert_Provision() → Provision_OnCertInstalled()
+note right of Provisioning_Manager: PROV_STATE_READY
+Provisioning_Manager -> Comm_Manager: Comm_SendStatus()
+else
+alt (retry_count < MAX_RETRIES)
+Provisioning_Manager --> WiFi_Scanner: EVENT:PROV_SCAN_START\nProvision_OnJoinResult() → WiFiScan_Start()
+end alt
+end alt
+
+@enduml

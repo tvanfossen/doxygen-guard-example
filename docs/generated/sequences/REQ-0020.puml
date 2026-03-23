@@ -1,13 +1,12 @@
 @startuml REQ-0020 Remote Status Reporting
 autonumber
 
+entity "WiFi Stack" as WiFi_Stack
 entity "Cloud" as Cloud
 
 box "System" #LightBlue
   participant "Comm Manager" as Comm_Manager
   participant "Event Bus" as Event_Bus
-  participant "Controller" as Controller
-  participant "OTA Manager" as OTA_Manager
 end box
 
 header
@@ -17,14 +16,12 @@ header
   //Preconditions:// REQ-0030 (Control Loop Processing)
 end header
 
-note over Comm_Manager: build_telemetry_payload()
-note over Comm_Manager: Shadow_OnConnectivityEvent()
-note over Comm_Manager: Shadow_Initialize()
 
+WiFi_Stack -> Comm_Manager: EVENT:WIFI_DISCONNECTED
+WiFi_Stack -> Comm_Manager: EVENT:WIFI_CONNECTED
+WiFi_Stack -> Comm_Manager: EVENT:MQTT_CONNACK
+WiFi_Stack -> Comm_Manager: EVENT:MQTT_CLOSE
 Comm_Manager -> Event_Bus: Event_register()
 Comm_Manager --> Cloud: EVENT:CLOUD_CONFIG_UPDATE\nShadow_ScheduleConfigPublish()
-Controller -> Comm_Manager: Comm_SendStatus()
-Controller -> Comm_Manager: Comm_SendStatus()
-OTA_Manager -> Comm_Manager: Comm_SendStatus()
 
 @enduml

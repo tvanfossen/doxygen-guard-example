@@ -13,6 +13,8 @@ header
 end header
 
 
+External -> Comm_Manager: EVENT:COMM_RX_RECEIVED
 Comm_Manager --> Controller: EVENT:CONTROL_ACTION\nComm_OnRemoteCommand() → Controller_ReportStatus()
+Controller -> Comm_Manager: Comm_SendStatus()
 
 @enduml
