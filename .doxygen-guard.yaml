@@ -21,6 +21,8 @@ trace:
         receives_prefix: ["EVENT:HW_"]
     - WiFi Stack:
         receives_prefix: ["EVENT:WIFI_", "EVENT:MQTT_"]
+    - User Action:
+        receives_prefix: ["EVENT:FACTORY_"]
   options:
     autonumber: true
 
