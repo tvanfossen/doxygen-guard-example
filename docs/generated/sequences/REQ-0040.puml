@@ -11,8 +11,8 @@ end box
 
 header
   **REQ-0040: OTA Firmware Update**
-  //Description:// Orchestrate firmware update: download coordination and flash write and verify
-  //Acceptance Criteria:// OTA state machine progresses through download/write/verify; CRC passes before reporting success
+  //Description:// Orchestrate firmware update lifecycle: receive cloud notification, coordinate download, write to flash, verify integrity, report result.
+  //Acceptance Criteria:// OTA state machine progresses through download, write, verify. CRC verification passes before reporting success.
   //Preconditions:// REQ-0020 (Remote Status Reporting)
 end header
 

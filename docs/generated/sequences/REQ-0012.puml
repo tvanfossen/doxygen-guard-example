@@ -7,8 +7,8 @@ end box
 
 header
   **REQ-0012: Sensor Calibration**
-  //Description:// Apply factory calibration offsets using controller data
-  //Acceptance Criteria:// Sensor_Calibrate retrieves and applies offsets from Controller_GetCalibration
+  //Description:// Apply factory calibration offsets to sensor readings using data from the controller's calibration store.
+  //Acceptance Criteria:// Sensor_Calibrate retrieves offsets via Controller_GetCalibration. Offsets applied to subsequent readings.
 end header
 
 

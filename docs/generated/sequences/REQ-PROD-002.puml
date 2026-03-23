@@ -8,8 +8,8 @@ end box
 
 header
   **REQ-PROD-002: Remote Device Control**
-  //Description:// The system shall accept remote commands from cloud and execute control actions
-  //Acceptance Criteria:// Cloud command received within 30s; control action executed and status reported back
+  //Description:// The system shall accept remote commands from cloud and execute control actions.
+  //Acceptance Criteria:// Cloud command received within 30s. Control action executed and status reported back.
 end header
 
 

@@ -1,9 +1,6 @@
-# Software Architecture Requirements
-# Fine-grained, module-level requirements for direct code traceability.
-# Each maps tightly to a specific software module or interface.
-#
-# Compare with requirements.csv which contains both software-level
-# and product-level requirements demonstrating the many-to-one mapping.
+# Requirements
+# Software-level and product-level requirements for the example IoT project.
+# doxygen-guard uses `id` as the requirement key and `module` for participant resolution.
 
 - id: REQ-0010
   name: Temperature Sensing
@@ -101,4 +98,67 @@
   acceptance_criteria: >
     Event_register accepts bitmask and handler.
     Event_post dispatches to all matching handlers.
+  version: v1.0.0
+
+- id: REQ-0060
+  name: Device Provisioning
+  module: Provisioning Manager
+  description: >
+    Orchestrate device provisioning: scan networks,
+    join, and install certificates.
+  acceptance_criteria: >
+    Device progresses through scan/join/cert states.
+    Provisioning completes or retries on failure.
+  version: v1.0.0
+
+- id: REQ-0061
+  name: WiFi Network Discovery
+  module: WiFi Scanner
+  description: >
+    Scan for available networks and attempt association.
+  acceptance_criteria: >
+    Scan returns network list.
+    Join produces success or failure result.
+  version: v1.0.0
+
+- id: REQ-0062
+  name: Certificate Provisioning
+  module: Cert Manager
+  description: >
+    Fetch and install device certificate from provisioning server.
+  acceptance_criteria: >
+    Certificate downloaded via HTTPS and written to flash.
+  version: v1.0.0
+
+- id: REQ-PROD-001
+  name: Device Environmental Monitoring
+  module: Product
+  description: >
+    The system shall continuously monitor temperature and humidity
+    and report to cloud.
+  acceptance_criteria: >
+    Sensor readings aggregated and transmitted.
+    Cloud receives telemetry within reporting interval.
+  version: v1.0.0
+
+- id: REQ-PROD-002
+  name: Remote Device Control
+  module: Product
+  description: >
+    The system shall accept remote commands from cloud
+    and execute control actions.
+  acceptance_criteria: >
+    Cloud command received within 30s.
+    Control action executed and status reported back.
+  version: v1.0.0
+
+- id: REQ-PROD-003
+  name: Over-the-Air Firmware Update
+  module: Product
+  description: >
+    The system shall support remote firmware updates
+    with integrity verification.
+  acceptance_criteria: >
+    OTA completes download/flash/verify cycle.
+    Device reports success or failure to cloud.
   version: v1.0.0

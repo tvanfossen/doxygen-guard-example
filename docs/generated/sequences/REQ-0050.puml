@@ -7,9 +7,11 @@ end box
 
 header
   **REQ-0050: Event Bus Infrastructure**
-  //Description:// Bitmask-based event registration and dispatch for inter-module communication
-  //Acceptance Criteria:// Event_register accepts bitmask+handler; Event_post dispatches to matching handlers
+  //Description:// Provide bitmask-based event registration and dispatch for decoupled inter-module communication.
+  //Acceptance Criteria:// Event_register accepts bitmask and handler. Event_post dispatches to all matching handlers.
 end header
 
+
+Event_Bus --> Event_Bus: EVENT:DISPATCH_COMPLETE
 
 @enduml

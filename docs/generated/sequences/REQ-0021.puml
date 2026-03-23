@@ -8,8 +8,8 @@ end box
 
 header
   **REQ-0021: Remote Command Handling**
-  //Description:// Receive remote commands and dispatch control actions
-  //Acceptance Criteria:// Comm_OnRemoteCommand parses command and posts EVENT:CONTROL_ACTION
+  //Description:// Receive and dispatch remote commands from cloud. Parse command payload and post control action events.
+  //Acceptance Criteria:// Comm_OnRemoteCommand parses command and posts EVENT:CONTROL_ACTION.
 end header
 
 

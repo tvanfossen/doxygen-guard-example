@@ -9,8 +9,8 @@ end box
 
 header
   **REQ-PROD-001: Device Environmental Monitoring**
-  //Description:// The system shall continuously monitor temperature and humidity and report to cloud
-  //Acceptance Criteria:// Sensor readings aggregated and transmitted; cloud receives telemetry within reporting interval
+  //Description:// The system shall continuously monitor temperature and humidity and report to cloud.
+  //Acceptance Criteria:// Sensor readings aggregated and transmitted. Cloud receives telemetry within reporting interval.
 end header
 
 

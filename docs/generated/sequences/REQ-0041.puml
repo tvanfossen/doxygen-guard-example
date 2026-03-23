@@ -11,8 +11,8 @@ end box
 
 header
   **REQ-0041: OTA Download Coordination**
-  //Description:// Stream firmware chunks from HTTP server for OTA processing
-  //Acceptance Criteria:// Comm_DownloadFirmware streams chunks and posts completion event
+  //Description:// Stream firmware chunks from HTTP server and post chunk-received events for OTA manager processing.
+  //Acceptance Criteria:// Comm_DownloadFirmware streams chunks and posts completion event.
 end header
 
 

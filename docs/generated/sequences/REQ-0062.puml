@@ -9,13 +9,14 @@ end box
 
 header
   **REQ-0062: Certificate Provisioning**
-  //Description:// Fetch and install device certificate from provisioning server
-  //Acceptance Criteria:// Certificate downloaded via HTTPS and written to flash
+  //Description:// Fetch and install device certificate from provisioning server.
+  //Acceptance Criteria:// Certificate downloaded via HTTPS and written to flash.
 end header
 
 
 Cert_Manager --> Provisioning_Manager: EVENT:PROV_CERT_INSTALLED\nCert_Provision() → Provision_OnCertInstalled()
 note right of Provisioning_Manager: PROV_STATE_READY
 Provisioning_Manager -> Comm_Manager: Comm_SendStatus()
+Provisioning_Manager --> Provisioning_Manager: EVENT:PROV_COMPLETE
 
 @enduml

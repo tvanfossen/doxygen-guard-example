@@ -9,8 +9,8 @@ end box
 
 header
   **REQ-0061: WiFi Network Discovery**
-  //Description:// Scan for available networks and attempt association
-  //Acceptance Criteria:// Scan returns network list; join produces success or failure result
+  //Description:// Scan for available networks and attempt association.
+  //Acceptance Criteria:// Scan returns network list. Join produces success or failure result.
 end header
 
 
@@ -27,6 +27,7 @@ Provisioning_Manager --> WiFi_Scanner: EVENT:PROV_SCAN_START\nProvision_OnJoinRe
 end alt
 end alt
 else
+Provisioning_Manager --> Provisioning_Manager: EVENT:PROV_FAILED
 end alt
 
 @enduml

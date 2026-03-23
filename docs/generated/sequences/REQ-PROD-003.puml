@@ -11,8 +11,8 @@ end box
 
 header
   **REQ-PROD-003: Over-the-Air Firmware Update**
-  //Description:// The system shall support remote firmware updates with integrity verification
-  //Acceptance Criteria:// OTA completes download/flash/verify cycle; device reports success or failure to cloud
+  //Description:// The system shall support remote firmware updates with integrity verification.
+  //Acceptance Criteria:// OTA completes download/flash/verify cycle. Device reports success or failure to cloud.
   //Preconditions:// REQ-0020 (Remote Status Reporting)
 end header
 

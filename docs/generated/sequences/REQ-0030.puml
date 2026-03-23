@@ -8,8 +8,8 @@ end box
 
 header
   **REQ-0030: Control Loop Processing**
-  //Description:// Process sensor data against thresholds and dispatch control actions
-  //Acceptance Criteria:// Controller_OnSensorData evaluates thresholds; Controller_ReportStatus sends status
+  //Description:// Process sensor data against thresholds and dispatch control actions. Report status via comm manager.
+  //Acceptance Criteria:// Controller_OnSensorData evaluates thresholds. Controller_ReportStatus sends status via Comm_SendStatus.
 end header
 
 

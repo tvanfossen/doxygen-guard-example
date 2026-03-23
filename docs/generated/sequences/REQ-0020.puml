@@ -11,8 +11,8 @@ end box
 
 header
   **REQ-0020: Remote Status Reporting**
-  //Description:// Publish device status to cloud via MQTT and handle shadow sync
-  //Acceptance Criteria:// Comm_SendStatus publishes to MQTT; shadow events update connectivity state
+  //Description:// Publish device status to cloud via MQTT transport. Handle shadow state synchronization events.
+  //Acceptance Criteria:// Comm_SendStatus publishes to MQTT topic. Shadow connectivity events update local state.
   //Preconditions:// REQ-0030 (Control Loop Processing)
 end header
 
@@ -21,6 +21,8 @@ WiFi_Stack -> Comm_Manager: EVENT:WIFI_DISCONNECTED
 WiFi_Stack -> Comm_Manager: EVENT:WIFI_CONNECTED
 WiFi_Stack -> Comm_Manager: EVENT:MQTT_CONNACK
 WiFi_Stack -> Comm_Manager: EVENT:MQTT_CLOSE
+Comm_Manager --> Comm_Manager: EVENT:TELEMETRY_READY
+Comm_Manager --> Comm_Manager: EVENT:COMM_TX_COMPLETE
 Comm_Manager -> Event_Bus: Event_register()
 Comm_Manager --> Cloud: EVENT:CLOUD_CONFIG_UPDATE\nShadow_ScheduleConfigPublish()
 

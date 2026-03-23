@@ -12,8 +12,8 @@ end box
 
 header
   **REQ-0060: Device Provisioning**
-  //Description:// Orchestrate device provisioning: scan networks and join and install certificates
-  //Acceptance Criteria:// Device progresses through scan/join/cert states; provisioning completes or retries on failure
+  //Description:// Orchestrate device provisioning: scan networks, join, and install certificates.
+  //Acceptance Criteria:// Device progresses through scan/join/cert states. Provisioning completes or retries on failure.
 end header
 
 

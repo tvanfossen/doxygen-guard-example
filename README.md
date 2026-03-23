@@ -2,29 +2,11 @@
 
 Example IoT project demonstrating doxygen-guard features: validation, traceability, sequence diagram generation, and change-impact analysis.
 
-## Two Requirements Models
+## Requirements
 
-This example ships with two configurations showing that doxygen-guard works with both product-level and software-level requirements:
+Requirements are defined in `requirements.yaml`. Each requirement has an `id`, `name`, `module` (used for diagram participant resolution), `description`, and `acceptance_criteria`.
 
-### Product-level requirements (CSV — default)
-
-```bash
-doxygen-guard --config .doxygen-guard.yaml trace --all src/
-```
-
-Uses `requirements.csv` with `Subsystem` as the participant field. Product requirements like `REQ-PROD-001 Device Environmental Monitoring` span multiple software modules — many functions trace to one requirement. This is how product teams typically write requirements.
-
-### Software-level requirements (YAML — alternate)
-
-```bash
-doxygen-guard --config .doxygen-guard-sw.yaml trace --all src/
-```
-
-Uses `requirements.yaml` with `module` as the participant field. Each requirement maps tightly to a single software module with acceptance criteria. This is how embedded software teams decompose architecture.
-
-### Dual-tagging
-
-Source functions carry both levels simultaneously:
+Functions carry both software-level and product-level requirement tags:
 
 ```c
 /**
@@ -34,7 +16,7 @@ Source functions carry both levels simultaneously:
  */
 ```
 
-The `participant_field` config key determines which column/field resolves the diagram participant names. Switch configs to see different diagram perspectives of the same codebase.
+The `participant_field` config key (`module` in `.doxygen-guard.yaml`) determines which field resolves diagram participant names.
 
 ## Tag Taxonomy
 
@@ -79,6 +61,7 @@ src/
 ├── controller/      Control loop and message dispatch
 ├── comm/            MQTT communication and shadow sync
 ├── ota/             Over-the-air firmware update
+├── provisioning/    Device provisioning state machine
 ├── event_bus/       Event registration and dispatch
 └── analytics/       Python data pipeline (demonstrates Python support)
 ```
