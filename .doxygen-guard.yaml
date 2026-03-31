@@ -3,7 +3,7 @@ output_dir: docs/generated/
 validate:
   tags:
     req:
-      pattern: "^REQ-\\w+$"
+      pattern: "^REQ-[\\w-]+$"
     emits:
       require_prefix: ["EVENT:"]
     handles:

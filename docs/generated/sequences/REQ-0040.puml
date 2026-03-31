@@ -1,5 +1,7 @@
 @startuml REQ-0040 OTA Firmware Update
 autonumber
+skinparam maxMessageSize 200
+skinparam responseMessageBelowArrow true
 
 entity "Cloud" as Cloud
 entity "Hardware" as Hardware
@@ -11,22 +13,27 @@ end box
 
 header
   **REQ-0040: OTA Firmware Update**
-  //Description:// Orchestrate firmware update lifecycle: receive cloud notification, coordinate download, write to flash, verify integrity, report result.
-  //Acceptance Criteria:// OTA state machine progresses through download, write, verify. CRC verification passes before reporting success.
+  //Description:// Orchestrate firmware update lifecycle: receive cloud\nnotification, coordinate download, write to flash, verify\nintegrity, report result.
+  //Acceptance Criteria:// OTA state machine progresses through download, write,\nverify. CRC verification passes before reporting success.
   //Preconditions:// REQ-0020 (Remote Status Reporting)
 end header
 
 
-Cloud -> OTA_Manager: EVENT:CLOUD_OTA_AVAILABLE
+Cloud --> OTA_Manager: EVENT:CLOUD_OTA_AVAILABLE\nOTA_OnUpdateAvailable()
+activate OTA_Manager
+== OTA_OnUpdateAvailable() ==
 note right of OTA_Manager: OTA_STATE_CHANGE
-OTA_Manager --> Comm_Manager: EVENT:COMM_DOWNLOAD_START\nOTA_OnUpdateAvailable() → Comm_DownloadFirmware()
-loop (http_has_data(&stream))
-Comm_Manager --> OTA_Manager: EVENT:COMM_CHUNK_RECEIVED\nComm_DownloadFirmware() → OTA_OnChunkReceived()
+OTA_Manager --> Comm_Manager: EVENT:COMM_DOWNLOAD_START\nOTA_OnUpdateAvailable() -> Comm_DownloadFirmware()
+loop http_has_data(&stream)
+Comm_Manager --> OTA_Manager: EVENT:COMM_CHUNK_RECEIVED\nComm_DownloadFirmware() -> OTA_OnChunkReceived()
 OTA_Manager --> Hardware: EVENT:HW_FLASH_WRITE\nOTA_OnChunkReceived()
 end loop
-Comm_Manager --> OTA_Manager: EVENT:COMM_DOWNLOAD_COMPLETE\nComm_DownloadFirmware() → OTA_OnDownloadComplete()
+Comm_Manager --> OTA_Manager: EVENT:COMM_DOWNLOAD_COMPLETE\nComm_DownloadFirmware() -> OTA_OnDownloadComplete()
 note right of OTA_Manager: OTA_VERIFY_CRC
 OTA_Manager -> Comm_Manager: Comm_SendStatus()
+activate Comm_Manager
+Comm_Manager --> OTA_Manager: return
+deactivate Comm_Manager
 OTA_Manager --> Cloud: EVENT:CLOUD_OTA_RESULT\nOTA_OnDownloadComplete()
 
 @enduml

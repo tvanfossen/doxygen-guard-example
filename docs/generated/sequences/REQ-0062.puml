@@ -1,5 +1,7 @@
 @startuml REQ-0062 Certificate Provisioning
 autonumber
+skinparam maxMessageSize 200
+skinparam responseMessageBelowArrow true
 
 box "System" #LightBlue
   participant "Cert Manager" as Cert_Manager
@@ -9,14 +11,17 @@ end box
 
 header
   **REQ-0062: Certificate Provisioning**
-  //Description:// Fetch and install device certificate from provisioning server.
+  //Description:// Fetch and install device certificate from provisioning\nserver.
   //Acceptance Criteria:// Certificate downloaded via HTTPS and written to flash.
 end header
 
 
-Cert_Manager --> Provisioning_Manager: EVENT:PROV_CERT_INSTALLED\nCert_Provision() → Provision_OnCertInstalled()
+Cert_Manager --> Provisioning_Manager: EVENT:PROV_CERT_INSTALLED\nCert_Provision() -> Provision_OnCertInstalled()
 note right of Provisioning_Manager: PROV_STATE_READY
 Provisioning_Manager -> Comm_Manager: Comm_SendStatus()
+activate Comm_Manager
+Comm_Manager --> Provisioning_Manager: return
+deactivate Comm_Manager
 Provisioning_Manager --> Provisioning_Manager: EVENT:PROV_COMPLETE
 
 @enduml
