@@ -1,8 +1,17 @@
+/** @module Controller */
+/**
+ * @brief Initialize message bus event handlers.
+ * @version 1.0
+ * @req REQ-0030
+ */
+void MsgBus_Init(void) {
+    Event_register(EVENT_MSG_QUEUED, MsgBus_ProcessQueue);
+}
+
 /**
  * @brief Enqueue an inbound event from the MCU for async processing.
  * @version 1.0
  * @req REQ-0030
- * @emits EVENT:MSG_QUEUED
  */
 void MsgBus_QueueInbound(msg_event_t event_id) {
     msg_t msg = { .event_id = event_id };
@@ -14,8 +23,6 @@ void MsgBus_QueueInbound(msg_event_t event_id) {
  * @brief Dequeue and dispatch inbound events to registered callbacks.
  * @version 1.0
  * @req REQ-0030
- * @handles EVENT:MSG_QUEUED
- * @ext comm::Comm_SendStatus
  * @triggers MSG_DISPATCH_CYCLE
  */
 void MsgBus_ProcessQueue(void) {

@@ -1,9 +1,9 @@
+/** @module Sensor Driver */
 /**
  * @brief Read raw temperature from the sensor hardware.
  * @version 1.0
  * @req REQ-0010
  * @req REQ-PROD-001
- * @emits EVENT:SENSOR_DATA_READY
  */
 int Sensor_ReadTemperature(void) {
     int raw = hw_read_adc(TEMP_CHANNEL);
@@ -16,7 +16,6 @@ int Sensor_ReadTemperature(void) {
  * @version 1.0
  * @req REQ-0011
  * @req REQ-PROD-001
- * @emits EVENT:SENSOR_DATA_READY
  */
 int Sensor_ReadHumidity(void) {
     int raw = hw_read_adc(HUMIDITY_CHANNEL);
@@ -28,7 +27,6 @@ int Sensor_ReadHumidity(void) {
  * @brief Calibrate sensor with factory offsets.
  * @version 1.0
  * @req REQ-0012
- * @ext controller::Controller_GetCalibration
  */
 void Sensor_Calibrate(void) {
     calibration_t cal = Controller_GetCalibration();

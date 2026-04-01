@@ -4,25 +4,19 @@ validate:
   tags:
     req:
       pattern: "^REQ-[\\w-]+$"
-    emits:
-      require_prefix: ["EVENT:"]
-    handles:
-      require_prefix: ["EVENT:"]
-    ext:
-      require_contains: "::"
 
 trace:
   format: plantuml
   participant_field: "module"
   external:
     - Cloud:
-        receives_prefix: ["EVENT:CLOUD_"]
+        receives_prefix: ["EVENT_CLOUD_"]
     - Hardware:
-        receives_prefix: ["EVENT:HW_"]
+        receives_prefix: ["EVENT_HW_"]
     - WiFi Stack:
-        receives_prefix: ["EVENT:WIFI_", "EVENT:MQTT_"]
+        receives_prefix: ["EVENT_WIFI_", "EVENT_MQTT_"]
     - User Action:
-        receives_prefix: ["EVENT:FACTORY_"]
+        receives_prefix: ["EVENT_FACTORY_"]
   options:
     autonumber: true
 

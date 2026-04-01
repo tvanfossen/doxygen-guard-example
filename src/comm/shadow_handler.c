@@ -1,11 +1,8 @@
+/** @module Comm Manager */
 /**
  * @brief Dispatch WiFi and MQTT events to update connectivity state.
  * @version 1.0
  * @req REQ-0020
- * @handles EVENT:WIFI_DISCONNECTED
- * @handles EVENT:WIFI_CONNECTED
- * @handles EVENT:MQTT_CONNACK
- * @handles EVENT:MQTT_CLOSE
  */
 void Shadow_OnConnectivityEvent(uint64_t ev, void *data) {
     switch (ev) {
@@ -28,7 +25,6 @@ void Shadow_OnConnectivityEvent(uint64_t ev, void *data) {
  * @brief Register shadow event handlers with the event bus.
  * @version 1.0
  * @req REQ-0020
- * @ext event_bus::Event_register
  */
 void Shadow_Initialize(void) {
     Event_register(
@@ -43,7 +39,6 @@ void Shadow_Initialize(void) {
  * @version 1.1
  * @req REQ-0020
  * @assumes REQ-0030
- * @emits EVENT:CLOUD_CONFIG_UPDATE
  */
 void Shadow_ScheduleConfigPublish(void) {
     timer_set(&config_publish_timer, CONFIG_PUBLISH_DELAY_MS,

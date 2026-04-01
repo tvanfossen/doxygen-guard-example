@@ -1,9 +1,18 @@
+/** @module Controller */
+/**
+ * @brief Initialize controller event handlers.
+ * @version 1.0
+ * @req REQ-0030
+ */
+void Controller_Init(void) {
+    Event_register(EVENT_SENSOR_DATA_READY, Controller_OnSensorData);
+    Event_register(EVENT_CONTROL_ACTION, Controller_ReportStatus);
+}
+
 /**
  * @brief Handle incoming sensor data and decide on control action.
  * @version 1.0
  * @req REQ-0030
- * @handles EVENT:SENSOR_DATA_READY
- * @emits EVENT:CONTROL_ACTION
  * @triggers THRESHOLD_CHECK
  */
 void Controller_OnSensorData(int sensor_value) {
@@ -26,8 +35,6 @@ calibration_t Controller_GetCalibration(void) {
  * @version 1.0
  * @req REQ-0030
  * @req REQ-PROD-002
- * @handles EVENT:CONTROL_ACTION
- * @ext comm::Comm_SendStatus
  */
 void Controller_ReportStatus(int action) {
     status_t status = build_status(action);

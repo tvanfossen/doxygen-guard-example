@@ -1,11 +1,21 @@
+/** @module OTA Manager */
+/**
+ * @brief Initialize OTA manager event handlers.
+ * @version 1.0
+ * @req REQ-0040
+ */
+void OTA_Init(void) {
+    Event_register(EVENT_CLOUD_OTA_AVAILABLE, OTA_OnUpdateAvailable);
+    Event_register(EVENT_COMM_CHUNK_RECEIVED, OTA_OnChunkReceived);
+    Event_register(EVENT_COMM_DOWNLOAD_COMPLETE, OTA_OnDownloadComplete);
+}
+
 /**
  * @brief Handle cloud notification of available firmware update.
  * @version 1.1
  * @req REQ-0040
  * @req REQ-PROD-003
  * @assumes REQ-0020
- * @handles EVENT:CLOUD_OTA_AVAILABLE
- * @emits EVENT:COMM_DOWNLOAD_START
  * @triggers OTA_STATE_CHANGE
  */
 void OTA_OnUpdateAvailable(const char *version, const char *url) {
@@ -17,8 +27,6 @@ void OTA_OnUpdateAvailable(const char *version, const char *url) {
  * @brief Process downloaded firmware chunk and write to flash.
  * @version 1.0
  * @req REQ-0040
- * @handles EVENT:COMM_CHUNK_RECEIVED
- * @emits EVENT:HW_FLASH_WRITE
  */
 void OTA_OnChunkReceived(const uint8_t *data, size_t len) {
     event_post(EVENT_HW_FLASH_WRITE, data);
@@ -29,9 +37,6 @@ void OTA_OnChunkReceived(const uint8_t *data, size_t len) {
  * @brief Verify firmware integrity after download completes.
  * @version 1.0
  * @req REQ-0040
- * @handles EVENT:COMM_DOWNLOAD_COMPLETE
- * @ext comm::Comm_SendStatus
- * @emits EVENT:CLOUD_OTA_RESULT
  * @triggers OTA_VERIFY_CRC
  */
 void OTA_OnDownloadComplete(void) {

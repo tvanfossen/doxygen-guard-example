@@ -1,9 +1,20 @@
+/** @module Provisioning Manager */
+/**
+ * @brief Initialize provisioning manager event handlers.
+ * @version 1.0
+ * @req REQ-0060
+ */
+void Provision_Init(void) {
+    Event_register(EVENT_FACTORY_RESET_COMPLETE, Provision_Start);
+    Event_register(EVENT_PROV_SCAN_COMPLETE, Provision_OnScanComplete);
+    Event_register(EVENT_PROV_JOIN_RESULT, Provision_OnJoinResult);
+    Event_register(EVENT_PROV_CERT_INSTALLED, Provision_OnCertInstalled);
+}
+
 /**
  * @brief Begin device provisioning after factory reset.
  * @version 1.0
  * @req REQ-0060
- * @handles EVENT:FACTORY_RESET_COMPLETE
- * @emits EVENT:PROV_SCAN_START
  * @triggers PROV_STATE_INIT
  */
 void Provision_Start(void) {
@@ -15,9 +26,6 @@ void Provision_Start(void) {
  * @brief Handle scan results and attempt network join.
  * @version 1.0
  * @req REQ-0060
- * @handles EVENT:PROV_SCAN_COMPLETE
- * @emits EVENT:PROV_JOIN_REQUEST
- * @emits EVENT:PROV_FAILED
  */
 void Provision_OnScanComplete(scan_result_t *results, int count) {
     if (count > 0) {
@@ -32,9 +40,6 @@ void Provision_OnScanComplete(scan_result_t *results, int count) {
  * @brief Handle network join result with retry logic.
  * @version 1.0
  * @req REQ-0060
- * @handles EVENT:PROV_JOIN_RESULT
- * @emits EVENT:PROV_CERT_REQUEST
- * @emits EVENT:PROV_SCAN_START
  * @triggers PROV_RETRY_CHECK
  */
 void Provision_OnJoinResult(join_result_t *result) {
@@ -52,9 +57,6 @@ void Provision_OnJoinResult(join_result_t *result) {
  * @brief Handle certificate provisioning and finalize.
  * @version 1.0
  * @req REQ-0060
- * @handles EVENT:PROV_CERT_INSTALLED
- * @ext comm::Comm_SendStatus
- * @emits EVENT:PROV_COMPLETE
  * @triggers PROV_STATE_READY
  */
 void Provision_OnCertInstalled(void) {

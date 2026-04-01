@@ -1,3 +1,4 @@
+/** @module Event Bus */
 /**
  * @brief Register an event handler for a bitmask of events.
  * @version 1.0
@@ -18,7 +19,6 @@ void Event_register(uint64_t event_mask, event_handler_fn handler) {
  * @brief Post an event to all registered handlers matching the event bit.
  * @version 1.0
  * @req REQ-0050
- * @emits EVENT:DISPATCH_COMPLETE
  */
 void Event_post(uint64_t event, void *data) {
     for (int i = 0; i < MAX_HANDLERS; i++) {

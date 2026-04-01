@@ -23,7 +23,6 @@ def compute_average(readings):
 ## @brief Format telemetry payload for transmission.
 #  @version 1.0
 #  @req REQ-0020
-#  @emits EVENT:TELEMETRY_READY
 def build_telemetry_payload(avg_temp, avg_humidity):
     return {
         "temperature": avg_temp,
