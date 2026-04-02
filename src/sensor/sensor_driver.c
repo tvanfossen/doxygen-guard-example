@@ -4,6 +4,7 @@
  * @version 1.0
  * @req REQ-0010
  * @req REQ-PROD-001
+ * @return Raw ADC temperature value
  */
 int Sensor_ReadTemperature(void) {
     int raw = hw_read_adc(TEMP_CHANNEL);
@@ -16,6 +17,7 @@ int Sensor_ReadTemperature(void) {
  * @version 1.0
  * @req REQ-0011
  * @req REQ-PROD-001
+ * @return Raw ADC humidity value
  */
 int Sensor_ReadHumidity(void) {
     int raw = hw_read_adc(HUMIDITY_CHANNEL);
