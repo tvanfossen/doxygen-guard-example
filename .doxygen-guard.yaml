@@ -19,6 +19,7 @@ trace:
         receives_prefix: ["EVENT_FACTORY_"]
   options:
     autonumber: true
+    event_emit_functions: ["event_post"]
 
 impact:
   requirements:

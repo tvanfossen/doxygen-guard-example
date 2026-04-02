@@ -25,6 +25,7 @@ void Controller_OnSensorData(int sensor_value) {
  * @brief Return current calibration offsets.
  * @version 1.0
  * @req REQ-0012
+ * @return Current calibration offset data
  */
 calibration_t Controller_GetCalibration(void) {
     return current_calibration;
