@@ -4,6 +4,7 @@ skinparam maxMessageSize 200
 skinparam responseMessageBelowArrow true
 
 box "System" #LightBlue
+  participant "Sensor Driver" as Sensor_Driver
   participant "Controller" as Controller
   participant "Comm Manager" as Comm_Manager
 end box
@@ -17,12 +18,16 @@ end header
 note over Controller: Controller_Init()
 note over Controller: MsgBus_Init()
 
+Sensor_Driver --> Controller: EVENT_SENSOR_DATA_READY\nController_OnSensorData()
+activate Controller
+Comm_Manager --> Controller: EVENT_CONTROL_ACTION\nController_ReportStatus()
+== Controller_OnSensorData() ==
 note right of Controller: Threshold Check
 alt sensor_value > threshold
 Controller --> Controller: EVENT_CONTROL_ACTION\nController_OnSensorData() -> Controller_ReportStatus()
 Controller -> Comm_Manager: Comm_SendStatus(&status)
 activate Comm_Manager
-Comm_Manager --> Controller: return
+Comm_Manager <-- Controller: return
 deactivate Comm_Manager
 end alt
 == MsgBus_QueueInbound() ==
@@ -32,9 +37,10 @@ loop queue_receive(&inbound_queue, &msg)
 alt msg.event_id == MSG_EVENT_STATUS_REQUEST
 Controller -> Comm_Manager: Comm_SendStatus(&status)
 activate Comm_Manager
-Comm_Manager --> Controller: return
+Comm_Manager <-- Controller: return
 deactivate Comm_Manager
 end alt
 end loop
+deactivate Controller
 
 @enduml
