@@ -8,6 +8,9 @@ validate:
 trace:
   format: plantuml
   participant_field: "module"
+  static_participants:
+    - name: User
+      type: actor
   external:
     - Cloud:
         receives_prefix: ["EVENT_CLOUD_"]
