@@ -11,18 +11,31 @@ trace:
   static_participants:
     - name: User
       type: actor
+    - name: Mobile
+      type: entity
   external:
     - Cloud:
-        receives_prefix: ["EVENT_CLOUD_"]
+        receives_prefix: ["EVENT_CLOUD_", "MQTT:"]
+        boundary_functions: ["CloudMgr_Publish"]
+        label_template: "MQTT: {arg0}"
+        entry_chain:
+          - { from: User, to: Mobile, label: "{req_name}" }
+          - { from: Mobile, to: Cloud, label: "{req_name}" }
     - Hardware:
         receives_prefix: ["EVENT_HW_"]
     - WiFi Stack:
         receives_prefix: ["EVENT_WIFI_", "EVENT_MQTT_"]
     - User Action:
         receives_prefix: ["EVENT_FACTORY_"]
+    - MCU:
+        receives_prefix: ["DURABLE:"]
+        boundary_functions: ["DurableEventCb"]
   options:
     autonumber: true
     event_emit_functions: ["event_post"]
+    show_returns: false
+    label_mode: brief
+    box_label: "IoT Library"
 
 impact:
   requirements:

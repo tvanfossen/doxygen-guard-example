@@ -130,6 +130,50 @@
     Certificate downloaded via HTTPS and written to flash.
   version: v1.0.0
 
+- id: REQ-0100
+  name: Start Clean Command
+  module: IoT Library
+  description: >
+    Receive cloud clean command via MQTT, dispatch to MCU,
+    report status changes back to cloud shadow.
+  acceptance_criteria: >
+    Cloud command dispatched to MCU via DCI callback.
+    Product status published to shadow on each change.
+    Cycle summary published on completion.
+  version: v1.0.0
+
+- id: REQ-0101
+  name: Device Setting Change
+  module: IoT Library
+  description: >
+    Receive shadow delta for device settings, apply to MCU
+    configuration, and report updated state to cloud.
+  acceptance_criteria: >
+    Setting applied to MCU via DCI callback.
+    Updated setting published to shadow/reported.
+  version: v1.0.0
+
+- id: REQ-0102
+  name: Dock Command
+  module: IoT Library
+  description: >
+    Receive cloud dock command via MQTT and send return-to-base
+    instruction to MCU.
+  acceptance_criteria: >
+    Dock command dispatched to MCU via DCI callback.
+    Product status published during return.
+  version: v1.0.0
+
+- id: REQ-0103
+  name: Error Reporting
+  module: IoT Library
+  description: >
+    Forward MCU error notifications to cloud for remote
+    diagnostics and alerting.
+  acceptance_criteria: >
+    Error info published to device/error topic.
+  version: v1.0.0
+
 - id: REQ-PROD-001
   name: Device Environmental Monitoring
   module: Product
