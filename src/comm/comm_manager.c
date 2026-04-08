@@ -1,4 +1,4 @@
-/** @module Comm Manager */
+/** @participant Comm Manager */
 /**
  * @brief Initialize comm manager event handlers.
  * @version 1.0

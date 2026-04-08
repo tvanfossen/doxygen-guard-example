@@ -34,6 +34,6 @@ def build_telemetry_payload(avg_temp, avg_humidity):
 ## @brief Scale a value by a constant factor.
 #  @version 1.1
 #  @utility
-#  @supports REQ-0010
+#  @utility REQ-0010
 def scale_value(x):
     return x * 2

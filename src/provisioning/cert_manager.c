@@ -1,4 +1,4 @@
-/** @module Cert Manager */
+/** @participant Cert Manager */
 /**
  * @brief Initialize certificate manager event handlers.
  * @version 1.0

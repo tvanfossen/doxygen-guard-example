@@ -1,4 +1,4 @@
-/** @module WiFi Scanner */
+/** @participant WiFi Scanner */
 /**
  * @brief Initialize WiFi scanner event handlers.
  * @version 1.0

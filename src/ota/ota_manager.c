@@ -1,4 +1,4 @@
-/** @module OTA Manager */
+/** @participant OTA Manager */
 /**
  * @brief Initialize OTA manager event handlers.
  * @version 1.0
@@ -15,8 +15,8 @@ void OTA_Init(void) {
  * @version 1.1
  * @req REQ-0040
  * @req REQ-PROD-003
- * @assumes REQ-0020
- * @triggers OTA_STATE_CHANGE
+ * @after REQ-0020
+ * @note OTA_STATE_CHANGE
  */
 void OTA_OnUpdateAvailable(const char *version, const char *url) {
     ota_state = OTA_DOWNLOADING;
@@ -37,7 +37,7 @@ void OTA_OnChunkReceived(const uint8_t *data, size_t len) {
  * @brief Verify firmware integrity after download completes.
  * @version 1.0
  * @req REQ-0040
- * @triggers OTA_VERIFY_CRC
+ * @note OTA_VERIFY_CRC
  */
 void OTA_OnDownloadComplete(void) {
     int valid = verify_crc(flash_base, bytes_written);
@@ -50,7 +50,7 @@ void OTA_OnDownloadComplete(void) {
  * @brief Query current OTA progress for status reporting.
  * @version 1.1
  * @utility
- * @supports REQ-0040
+ * @utility REQ-0040
  */
 int OTA_GetProgress(void) {
     return (bytes_written * 100) / total_size;

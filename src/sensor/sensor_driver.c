@@ -1,4 +1,4 @@
-/** @module Sensor Driver */
+/** @participant Sensor Driver */
 /**
  * @brief Read raw temperature from the sensor hardware.
  * @version 1.0

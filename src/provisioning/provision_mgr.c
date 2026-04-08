@@ -1,4 +1,4 @@
-/** @module Provisioning Manager */
+/** @participant Provisioning Manager */
 /**
  * @brief Initialize provisioning manager event handlers.
  * @version 1.0
@@ -15,7 +15,7 @@ void Provision_Init(void) {
  * @brief Begin device provisioning after factory reset.
  * @version 1.0
  * @req REQ-0060
- * @triggers PROV_STATE_INIT
+ * @note PROV_STATE_INIT
  */
 void Provision_Start(void) {
     prov_state = PROV_SCANNING;
@@ -40,7 +40,7 @@ void Provision_OnScanComplete(scan_result_t *results, int count) {
  * @brief Handle network join result with retry logic.
  * @version 1.0
  * @req REQ-0060
- * @triggers PROV_RETRY_CHECK
+ * @note PROV_RETRY_CHECK
  */
 void Provision_OnJoinResult(join_result_t *result) {
     if (result->success) {
@@ -57,7 +57,7 @@ void Provision_OnJoinResult(join_result_t *result) {
  * @brief Handle certificate provisioning and finalize.
  * @version 1.0
  * @req REQ-0060
- * @triggers PROV_STATE_READY
+ * @note PROV_STATE_READY
  */
 void Provision_OnCertInstalled(void) {
     prov_state = PROV_COMPLETE;

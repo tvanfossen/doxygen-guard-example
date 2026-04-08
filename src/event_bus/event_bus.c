@@ -1,4 +1,4 @@
-/** @module Event Bus */
+/** @participant Event Bus */
 /**
  * @brief Register an event handler for a bitmask of events.
  * @version 1.0

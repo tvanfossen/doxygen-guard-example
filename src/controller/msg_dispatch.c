@@ -1,4 +1,4 @@
-/** @module Controller */
+/** @participant Controller */
 /**
  * @brief Initialize message bus event handlers.
  * @version 1.0
@@ -23,7 +23,7 @@ void MsgBus_QueueInbound(msg_event_t event_id) {
  * @brief Dequeue and dispatch inbound events to registered callbacks.
  * @version 1.0
  * @req REQ-0030
- * @triggers MSG_DISPATCH_CYCLE
+ * @note MSG_DISPATCH_CYCLE
  */
 void MsgBus_ProcessQueue(void) {
     msg_t msg;
@@ -41,9 +41,9 @@ void MsgBus_ProcessQueue(void) {
  * @brief Register the MCU event callback for message dispatch.
  * @version 1.1
  * @utility
- * @supports REQ-0030
- * @supports REQ-0020
- * @supports REQ-0040
+ * @utility REQ-0030
+ * @utility REQ-0020
+ * @utility REQ-0040
  */
 void MsgBus_RegisterCallback(msg_event_cb callback) {
     my_eventCb = callback;
@@ -53,8 +53,8 @@ void MsgBus_RegisterCallback(msg_event_cb callback) {
  * @brief Register transport-layer callbacks for outbound data.
  * @version 1.1
  * @utility
- * @supports REQ-0030
- * @supports REQ-0020
+ * @utility REQ-0030
+ * @utility REQ-0020
  */
 void MsgBus_RegisterTransportCbs(transport_data_cb data_cb, transport_state_cb state_cb) {
     s_transport_data_cb = data_cb;

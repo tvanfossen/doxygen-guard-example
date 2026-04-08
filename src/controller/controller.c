@@ -1,4 +1,4 @@
-/** @module Controller */
+/** @participant Controller */
 /**
  * @brief Initialize controller event handlers.
  * @version 1.0
@@ -13,7 +13,7 @@ void Controller_Init(void) {
  * @brief Handle incoming sensor data and decide on control action.
  * @version 1.0
  * @req REQ-0030
- * @triggers THRESHOLD_CHECK
+ * @note THRESHOLD_CHECK
  */
 void Controller_OnSensorData(int sensor_value) {
     if (sensor_value > threshold) {

@@ -1,4 +1,4 @@
-/** @module Comm Manager */
+/** @participant Comm Manager */
 /**
  * @brief Dispatch WiFi and MQTT events to update connectivity state.
  * @version 1.0
@@ -38,7 +38,7 @@ void Shadow_Initialize(void) {
  * @brief Schedule config topic publish to cloud with short delay.
  * @version 1.1
  * @req REQ-0020
- * @assumes REQ-0030
+ * @after REQ-0030
  */
 void Shadow_ScheduleConfigPublish(void) {
     timer_set(&config_publish_timer, CONFIG_PUBLISH_DELAY_MS,
