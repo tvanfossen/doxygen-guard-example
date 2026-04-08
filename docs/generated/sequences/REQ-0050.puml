@@ -3,7 +3,10 @@ autonumber
 skinparam maxMessageSize 200
 skinparam responseMessageBelowArrow true
 
-box "System" #LightBlue
+actor "User" as User
+entity "Mobile" as Mobile
+
+box "IoT Library" #LightBlue
   participant "Event Bus" as Event_Bus
 end box
 

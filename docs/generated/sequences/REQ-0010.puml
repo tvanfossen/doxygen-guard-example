@@ -3,7 +3,10 @@ autonumber
 skinparam maxMessageSize 200
 skinparam responseMessageBelowArrow true
 
-box "System" #LightBlue
+actor "User" as User
+entity "Mobile" as Mobile
+
+box "IoT Library" #LightBlue
   participant "Sensor Driver" as Sensor_Driver
   participant "Controller" as Controller
 end box
@@ -16,10 +19,9 @@ end header
 
 
 == Sensor_ReadTemperature() ==
-Sensor_Driver --> Controller: EVENT_SENSOR_DATA_READY\nSensor_ReadTemperature() -> Controller_OnSensorData()
-note right of Controller: Threshold Check
+Sensor_Driver --> Controller: EVENT_SENSOR_DATA_READY
 alt sensor_value > threshold
-Controller --> Controller: EVENT_CONTROL_ACTION\nController_OnSensorData() -> Controller_ReportStatus()
+Controller --> Controller: EVENT_CONTROL_ACTION
 end alt
 
 @enduml

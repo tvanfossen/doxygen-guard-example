@@ -3,9 +3,12 @@ autonumber
 skinparam maxMessageSize 200
 skinparam responseMessageBelowArrow true
 
-box "System" #LightBlue
+actor "User" as User
+entity "Mobile" as Mobile
+entity "External" as External
+
+box "IoT Library" #LightBlue
   participant "Sensor Driver" as Sensor_Driver
-  participant "Controller" as Controller
 end box
 
 header
@@ -15,10 +18,10 @@ header
 end header
 
 
+External --> Sensor_Driver: Sensor_Calibrate()
+activate Sensor_Driver
 == Sensor_Calibrate() ==
-Sensor_Driver -> Controller: Controller_GetCalibration()
-activate Controller
-Controller <-- Sensor_Driver: return Current calibration offset data
-deactivate Controller
+Sensor_Driver -> Sensor_Driver: Controller_GetCalibration()
+deactivate Sensor_Driver
 
 @enduml
