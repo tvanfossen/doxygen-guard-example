@@ -20,9 +20,6 @@ end header
 
 == Sensor_ReadTemperature() ==
 Sensor_Driver --> Controller: EVENT_SENSOR_DATA_READY
-alt sensor_value > threshold
-Controller --> Controller: EVENT_CONTROL_ACTION
-end alt
 == Sensor_ReadHumidity() ==
 Sensor_Driver --> Controller: EVENT_SENSOR_DATA_READY
 
