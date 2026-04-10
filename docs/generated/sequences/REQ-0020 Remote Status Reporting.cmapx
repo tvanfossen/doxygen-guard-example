@@ -1,5 +1,0 @@
-<map id="REQ-0020 Remote Status Reporting_map" name="REQ-0020 Remote Status Reporting_map">
-<area shape="rect" id="id1" href="EVENT_MQTT_CLOSE" title="EVENT_MQTT_CLOSE" alt="" coords="18,339,127,354"/>
-<area shape="rect" id="id2" href="EVENT_MQTT_CONNACK" title="EVENT_MQTT_CONNACK" alt="" coords="18,273,149,288"/>
-<area shape="rect" id="id3" href="EVENT_WIFI_CONNECTED" title="EVENT_WIFI_CONNECTED" alt="" coords="18,206,154,221"/>
-</map>
