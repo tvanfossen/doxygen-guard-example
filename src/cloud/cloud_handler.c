@@ -37,7 +37,6 @@ void handle_shadow_delta(const char *key, const char *value) {
  * @brief Send command acknowledgment back to cloud.
  * @version 1.0
  * @req REQ-0100
- * @req REQ-0101
  * @receives EVENT_CLEAN_CMD
  * @calls cloud::CloudMgr_Publish
  */
