@@ -2,10 +2,11 @@
 
 /**
  * @brief Execute clean command — send drive settings to MCU.
- * @version 1.0
+ * @version 1.1
  * @req REQ-0100
  * @receives EVENT_CLEAN_CMD
  * @calls mcu::DurableEventCb
+ * @dispatch_key mode:active
  */
 void execute_clean(const clean_params_t *params) {
     drive_info_t info = {
